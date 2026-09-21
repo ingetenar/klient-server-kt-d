@@ -1,0 +1,15 @@
+Arenduskeskkonna kontroll
+Nimi: Hlib Klyha
+Kuupäev: 08.09.2026
+
+C:\> node --version
+v24.20.0
+
+C:\> npm --version
+11.19.0
+
+C:\> git --version
+git version 2.54.0.windows.1
+
+C:\> git init
+Initialized empty Git repository in C:/Users/santa/sulgpalliklubi/.git/
