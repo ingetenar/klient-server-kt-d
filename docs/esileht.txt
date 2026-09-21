@@ -1,0 +1,14 @@
+Ülesanne 5 - vormi saatmise tulemus
+
+Meetod GET, pärast vormi täitmist:
+
+index.html?alates=2026-09-17&vabu=5&sort=algus&epost=test%40example.com
+
+Tähelepanekud:
+1. Võtmed tulevad name-atribuutidest, mitte id-atribuutidest.
+2. Märkeruut ilmub aadressile ainult siis, kui see on valitud. Märkimata märkeruut kaob aadressilt täielikult.
+3. Tühi tekstiväli saadetakse tühja väärtusena, näiteks epost=.
+
+Meetod POST, sama vorm:
+Aadressiriba: http://127.0.0.1:5500/avalik/index.html
+Network-paneeli Payload all: alates=2026-09-17&vabu=5&sort=algus&epost=test%40example.com
