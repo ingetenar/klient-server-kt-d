@@ -1,0 +1,106 @@
+@import url("../materjal/avalik/style-2.css") layer(framework);
+
+@layer base, framework, components, ours, exception;
+
+@layer base {
+    :root {
+        color-scheme: light;
+
+        --surface: #ffffff;
+        --surface-alt: #f3f5f7;
+        --text: #1a2332;
+        --text-muted: #52606d;
+        --border: #b8c2cc;
+        --accent: #0b3d52;
+        --step: 1rem;
+        --radius: 0.5rem;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            color-scheme: dark;
+
+            --surface: #17202b;
+            --surface-alt: #202b38;
+            --text: #f4f7fa;
+            --text-muted: #c2ccd6;
+            --border: #667788;
+            --accent: #8bd5ff;
+        }
+    }
+
+    :root[data-theme="light"] {
+        color-scheme: light;
+
+        --surface: #ffffff;
+        --surface-alt: #f3f5f7;
+        --text: #1a2332;
+        --text-muted: #52606d;
+        --border: #b8c2cc;
+        --accent: #0b3d52;
+    }
+
+    :root[data-theme="dark"] {
+        color-scheme: dark;
+
+        --surface: #17202b;
+        --surface-alt: #202b38;
+        --text: #f4f7fa;
+        --text-muted: #c2ccd6;
+        --border: #667788;
+        --accent: #8bd5ff;
+    }
+
+    :where(body, h1, h2, h3, p) {
+        margin-block-start: 0;
+    }
+
+    body {
+        background-color: var(--surface);
+        color: var(--text);
+    }
+}
+
+@layer framework {
+    .field {
+        padding: 0.5rem;
+        background-color: var(--surface-alt);
+    }
+}
+
+@layer components {
+    :is(h1, h2, h3, legend, label) {
+        color: var(--text);
+    }
+
+    :is(a) {
+        color: var(--accent);
+    }
+
+    .help {
+        color: var(--text-muted);
+    }
+}
+
+@layer ours {
+    .field {
+        padding: var(--step);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background-color: var(--surface-alt);
+        color: var(--text);
+    }
+
+    :is(input, select, textarea, button) {
+        background-color: var(--surface);
+        color: var(--text);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+    }
+}
+
+@layer exception {
+    [aria-invalid="true"] {
+        border-color: #e05252;
+    }
+}
