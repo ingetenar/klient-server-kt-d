@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Pileti ostmine</title>
+
+    <link rel="stylesheet" href="../materjal/avalik/style-2.css">
+</head>
+
+<body>
+    <header>
+        <h1>Pileti ostmine</h1>
+
+        <nav aria-label="Põhinavigatsioon">
+            <a href="index.html">Tagasi sündmuste juurde</a>
+        </nav>
+    </header>
+
+    <main>
+        <form id="ost" action="purchase.html" method="post" novalidate>
+            <fieldset>
+                <legend>Ostja andmed</legend>
+
+                <p class="field">
+                    <label for="name">Nimi</label>
+                    <input
+                        id="name"
+                        name="name"
+                        type="text"
+                        required
+                        minlength="2"
+                        autocomplete="name"
+                        aria-describedby="name-error"
+                    >
+                    <span
+                        class="error"
+                        id="name-error"
+                        role="alert"
+                    ></span>
+                </p>
+
+                <p class="field">
+                    <label for="email">E-post</label>
+                    <input
+                        id="email"
+                        name="email"
+                        type="email"
+                        required
+                        autocomplete="email"
+                        aria-describedby="email-error"
+                    >
+                    <span
+                        class="error"
+                        id="email-error"
+                        role="alert"
+                    ></span>
+                </p>
+
+                <p class="field">
+                    <label for="email2">Korda e-posti aadressi</label>
+                    <input
+                        id="email2"
+                        name="email2"
+                        type="email"
+                        required
+                        autocomplete="email"
+                        aria-describedby="email2-error"
+                    >
+                    <span
+                        class="error"
+                        id="email2-error"
+                        role="alert"
+                    ></span>
+                </p>
+
+                <p class="field">
+                    <label for="phone">Telefon</label>
+                    <input
+                        id="phone"
+                        name="phone"
+                        type="tel"
+                        pattern="\+?[0-9 ]{7,15}"
+                        autocomplete="tel"
+                        aria-describedby="phone-help phone-error"
+                    >
+                    <span class="help" id="phone-help">
+                        Näiteks +372 5123 4567. Valikuline.
+                    </span>
+                    <span
+                        class="error"
+                        id="phone-error"
+                        role="alert"
+                    ></span>
+                </p>
+            </fieldset>
+
+            <fieldset>
+                <legend>Tellimuse andmed</legend>
+
+                <p class="field">
+                    <label for="event">Sündmus</label>
+                    <select
+                        id="event"
+                        name="event"
+                        required
+                        aria-describedby="event-error"
+                    >
+                        <option value="">Vali sündmus</option>
+                        <option value="130">Muusikaõhtu</option>
+                        <option value="131">Arendajate hommik</option>
+                    </select>
+                    <span
+                        class="error"
+                        id="event-error"
+                        role="alert"
+                    ></span>
+                </p>
+
+                <p class="field">
+                    <label for="tickets">Piletite arv</label>
+                    <input
+                        id="tickets"
+                        name="tickets"
+                        type="number"
+                        required
+                        min="1"
+                        max="6"
+                        step="1"
+                        aria-describedby="tickets-help tickets-error"
+                    >
+                    <span class="help" id="tickets-help">
+                        Ühe tellimusega saab osta kuni 6 piletit.
+                    </span>
+                    <span
+                        class="error"
+                        id="tickets-error"
+                        role="alert"
+                    ></span>
+                </p>
+
+                <p class="field">
+                    <label for="price">Pileti hind</label>
+                    <input
+                        id="price"
+                        name="price"
+                        type="number"
+                        required
+                        min="0"
+                        max="100"
+                        step="0.01"
+                        aria-describedby="price-error"
+                    >
+                    <span
+                        class="error"
+                        id="price-error"
+                        role="alert"
+                    ></span>
+                </p>
+
+                <p class="field">
+                    <label for="note">Märkus korraldajale</label>
+                    <textarea
+                        id="note"
+                        name="note"
+                        rows="3"
+                        maxlength="300"
+                    ></textarea>
+                </p>
+            </fieldset>
+
+            <p>
+                <button type="submit">Osta piletid</button>
+                <button type="reset">Tühjenda vorm</button>
+            </p>
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Piletikassa</p>
+    </footer>
+
+    <script type="module" src="validation-api.js"></script>
+</body>
+</html>
