@@ -3,100 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sulgpalliklubi</title>
-</head>
-<body>
-    <header>
-        <h1>Sulgpalliklubi</h1>
 
-        <nav>
-            <a href="#mangukorrad">Mängukorrad</a>
-            <a href="#otsing">Otsing</a>
+    <title>Piletikassa</title>
+
+    <link rel="stylesheet" href="../materjal/avalik/style-1.css">
+</head>
+
+<body>
+    <a href="#main-content">
+        Liigu põhisisu juurde
+    </a>
+
+    <header>
+        <h1>Piletikassa</h1>
+
+        <nav aria-label="Põhinavigatsioon">
+            <ul>
+                <li><a href="#sundmused">Sündmused</a></li>
+                <li><a href="#vordlus">Sündmuste võrdlus</a></li>
+            </ul>
         </nav>
     </header>
 
-    <main>
-        <section id="mangukorrad">
-            <h2>Mängukorrad</h2>
+    <main id="main-content">
+        <section id="sundmused" aria-labelledby="sundmused-title">
+            <h2 id="sundmused-title">Esiletõstetud sündmused</h2>
+
+            <ul>
+                <li>
+                    <article>
+                        <h3>
+                            <a href="/s/130Muusikaõhtu">Muusikaõhtu</a>
+                        </h3>
+
+                        <p>
+                            Õhtu täis elavat muusikat ja kohalikke esinejaid.
+                        </p>
+
+                        <p class="meta">
+                            <time datetime="2026-09-12T18:00">
+                                12. sept 18.00
+                            </time>
+                            · Vanemuise kontserdimaja
+                        </p>
+                    </article>
+                </li>
+
+                <li>
+                    <article>
+                        <h3>
+                            <a href="/s/131Arendajate hommik">Arendajate hommik</a>
+                        </h3>
+
+                        <img src="../materjal/avalik/images/pattern.svg" alt="Kujundus">
+
+                        <p>Kolm ettekannet ja hommikukohv.</p>
+
+                        <p class="meta">
+                            <time datetime="2026-09-13T09:30">
+                                13. sept 9.30
+                            </time>
+                            · Delta
+                        </p>
+                    </article>
+                </li>
+            </ul>
+        </section>
+
+        <section id="vordlus" aria-labelledby="vordlus-title">
+            <h2 id="vordlus-title">Sündmuste võrdlus</h2>
 
             <table>
+                <caption>Kahe esiletõstetud sündmuse võrdlus</caption>
+
                 <thead>
                     <tr>
-                        <th>Kuupäev</th>
-                        <th>Algus</th>
-                        <th>Väljakute arv</th>
-                        <th>Vabade kohtade arv</th>
+                        <th scope="col">Sündmus</th>
+                        <th scope="col">Kuupäev ja kellaaeg</th>
+                        <th scope="col">Asukoht</th>
+                        <th scope="col">Hind</th>
                     </tr>
                 </thead>
+
                 <tbody>
                     <tr>
-                        <td>10.09.2026</td>
-                        <td>18:00</td>
-                        <td>4</td>
-                        <td>8</td>
+                        <th scope="row">Muusikaõhtu</th>
+                        <td>
+                            <time datetime="2026-09-12T18:00">
+                                12. sept 18.00
+                            </time>
+                        </td>
+                        <td>Vanemuise kontserdimaja</td>
+                        <td>25 €</td>
                     </tr>
+
                     <tr>
-                        <td>12.09.2026</td>
-                        <td>17:00</td>
-                        <td>3</td>
-                        <td>4</td>
-                    </tr>
-                    <tr>
-                        <td>15.09.2026</td>
-                        <td>19:00</td>
-                        <td>5</td>
-                        <td>12</td>
+                        <th scope="row">Arendajate hommik</th>
+                        <td>
+                            <time datetime="2026-09-13T09:30">
+                                13. sept 9.30
+                            </time>
+                        </td>
+                        <td>Delta</td>
+                        <td>15 €</td>
                     </tr>
                 </tbody>
             </table>
         </section>
-
-        <section id="otsing">
-            <h2>Mängukordade otsing</h2>
-
-            <form action="index.html" method="get">
-                <fieldset>
-                    <legend>Otsingu tingimused</legend>
-
-                    <p>
-                        <label for="alates">Alates kuupäevast:</label>
-                        <input type="date" id="alates" name="alates">
-                    </p>
-
-                    <p>
-                        <label for="vabu">Vabu kohti vähemalt:</label>
-                        <input type="number" id="vabu" name="vabu" min="1" max="24">
-                    </p>
-
-                    <p>
-                        <label for="sort">Sorteerimine:</label>
-                        <select id="sort" name="sort">
-                            <option value="kuupaev">Kuupäeva järgi</option>
-                            <option value="algus">Algusaja järgi</option>
-                            <option value="vabad">Vabade kohtade järgi</option>
-                        </select>
-                    </p>
-
-                    <p>
-                        <input type="checkbox" id="ainultVabad" name="ainultVabad" value="1">
-                        <label for="ainultVabad">
-                            Näita ainult vabade kohtadega mängukordi
-                        </label>
-                    </p>
-
-                    <p>
-                        <label for="epost">E-post:</label>
-                        <input type="email" id="epost" name="epost">
-                    </p>
-
-                    <button type="submit">Otsi</button>
-                </fieldset>
-            </form>
-        </section>
     </main>
 
     <footer>
-        <p>&copy; 2026 Sulgpalliklubi</p>
+        <p>&copy; 2026 Piletikassa</p>
     </footer>
 </body>
 </html>
