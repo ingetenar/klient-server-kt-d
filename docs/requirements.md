@@ -44,70 +44,26 @@ Esimesed neli funktsiooni moodustavad ühe põhilise kasutusloo: kasutaja tuleb 
 
 ## Andmete üldpilt
 
-- Kasutaja loob tellimusi.
-- Kasutaja võib olla sündmuse korraldaja.
-- Sündmus toimub ühes toimumiskohas.
-- Sündmusel on üks või mitu piletitüüpi.
-- Tellimus sisaldab ühte või mitut tellimusrida.
-- Tellimusrida viitab piletitüübile.
-- Tellimusega on seotud makse.
-- Eduka makse järel luuakse pilet.
-- Pilet kuulub kasutajale ja on seotud sündmusega.
-- Piletit kontrollitakse sündmusele sisenemisel.
+kasutaja --< sündmus >-- toimumiskoht --< saaliplaan --< koht
+              |                                      |
+              +--< hinnaklass                        |
+              |                                      |
+              +--< ost --< pilet >-------------------+
+                            |
+                            +--< sissepääs
 
-Peamised olemid:
+hoid: koht + ostja + aegumisaeg
 
-- Kasutaja
-- Sündmus
-- Korraldaja seos
-- Toimumiskoht
-- Piletitüüp
-- Tellimus
-- Tellimusrida
-- Makse
-- Pilet
-- Piletikontroll
 
-## Arhitektuurimudelite võrdlus
+Peamised olemid ja seosed:
 
-### Monoliit
+- kasutaja võib luua mitu sündmust;
+- sündmus toimub ühes toimumiskohas;
+- toimumiskohal võib olla saaliplaan;
+- saaliplaan sisaldab kohti;
+- sündmus sisaldab hinnaklasse;
+- kasutaja teeb ostu;
+- ost sisaldab pileteid;
+- pilet on seotud koha ja sissepääsuga;
+- hoid seob ajutiselt koha, ostja ja aegumisaja.
 
-Monoliitses rakenduses asuvad kasutajaliides, äriloogika ja andmete töötlemine ühes rakenduses. Seda on alguses lihtne arendada, kuid kasvava süsteemi hooldamine ja muutmine võib muutuda keeruliseks.
-
-### Partnerivõrk ehk P2P
-
-P2P-mudelis suhtlevad kasutajate seadmed omavahel ja võivad ise andmeid hoida. See sobib süsteemidele, kus puudub keskne haldaja ja osalejad on võrdsed.
-
-Piletikassa jaoks ei ole P2P sobiv, sest tellimuste, maksete, piletite ja vabade kohtade kohta peab olema üks usaldusväärne andmeallikas. Kasutajate seadmed ei tohi ise otsustada, kas makse õnnestus või kas pilet kehtib.
-
-### Klient-server
-
-Klient-server-arhitektuuris kuvab klient kasutajaliidest ja saadab päringuid serverile. Server kontrollib õigusi ja ärireegleid, töötleb tellimusi ning suhtleb andmebaasiga.
-
-## Valitud arhitektuur
-
-Piletikassa kasutab klient-server-arhitektuuri.
-
-Klient-server on vajalik, sest süsteem peab tsentraalselt kontrollima:
-
-- kasutajate autentimist ja õigusi;
-- vabade piletite ning istekohtade arvu;
-- tellimuste loomist;
-- maksete tulemusi;
-- piletite väljastamist;
-- piletite kehtivust;
-- korraldajate õigusi;
-- andmete terviklikkust.
-
-Klient ei saa olla nende otsuste puhul usaldusväärne, sest kasutaja saab brauseris olevat HTML-i, CSS-i ja JavaScripti muuta. Server peab kõik olulised andmed ja tegevused uuesti kontrollima.
-
-## Mida kaasaegne CSS selles kontrolltöös JavaScripti asemel tegi
-
-- `:user-invalid` näitab välja vigast olekut pärast seda, kui kasutaja on väljaga tegelenud.
-- `@layer` määrab stiilikihtide prioriteedi ilma keerukate selektorite või `!important` kasutamiseta.
-- CSS-i muutujad võimaldavad hallata värve, vahemikke ja teemasid ühest kohast.
-- `prefers-color-scheme` valib automaatselt kasutaja süsteemile vastava heleda või tumeda teema.
-- `clamp()` muudab kirjasuurust sujuvalt vastavalt ekraani laiusele.
-- CSS Grid koos `auto-fit` ja `minmax()` funktsioonidega muudab kaartide paigutust ilma JavaScriptita.
-- Konteinerpäring muudab komponendi kujundust selle enda laiuse järgi.
-- `content-visibility: auto` võimaldab brauseril ekraanist väljas olevate elementide renderdamist edasi lükata.
