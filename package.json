@@ -1,0 +1,28 @@
+{
+  "name": "sulgpalliklubi",
+  "version": "1.0.0",
+  "description": "Sulgpalliklubi projekt kliendi-serveri mudeli ja veebirakenduse tööpõhimõtete õppimiseks.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ingetenar/klient-server-kt-d.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ingetenar/klient-server-kt-d/issues"
+  },
+  "homepage": "https://github.com/ingetenar/klient-server-kt-d#readme",
+  "dependencies": {
+    "bootstrap": "^5.3.8",
+    "sass": "^1.105.0"
+  }
+}

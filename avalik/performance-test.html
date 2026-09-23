@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS-i jõudluse test</title>
+
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 1rem;
+        }
+
+        .controls {
+            position: sticky;
+            top: 0;
+            padding: 1rem;
+            background: white;
+            border: 1px solid #999;
+            z-index: 1;
+        }
+
+        .events {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .card {
+            padding: 1rem;
+            border: 1px solid #999;
+        }
+
+        .use-content-visibility .card {
+            content-visibility: auto;
+            contain-intrinsic-size: auto 20rem;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>CSS-i jõudluse test</h1>
+
+    <div class="controls">
+        <button id="without-visibility" type="button">
+            Mõõda ilma content-visibility atribuudita
+        </button>
+
+        <button id="with-visibility" type="button">
+            Mõõda content-visibility atribuudiga
+        </button>
+
+        <button id="selectors" type="button">
+            Mõõda selektoreid
+        </button>
+
+        <pre id="result"></pre>
+    </div>
+
+    <main>
+        <div class="events" id="events"></div>
+    </main>
+
+    <script>
+        const events = document.querySelector("#events");
+        const result = document.querySelector("#result");
+
+        function createCards(useContentVisibility) {
+            events.replaceChildren();
+            events.classList.toggle(
+                "use-content-visibility",
+                useContentVisibility
+            );
+
+            const fragment = document.createDocumentFragment();
+            const start = performance.now();
+
+            for (let i = 1; i <= 5000; i += 1) {
+                const article = document.createElement("article");
+                article.className = "card";
+                article.dataset.event = String(i);
+
+                article.innerHTML = `
+                    <h2>Sündmus ${i}</h2>
+                    <p>Sündmuse lühikirjeldus ja piletiinfo.</p>
+                    <a href="#event-${i}">Vaata sündmust</a>
+                `;
+
+                fragment.append(article);
+            }
+
+            events.append(fragment);
+
+            void events.offsetHeight;
+
+            const end = performance.now();
+            return end - start;
+        }
+
+        function measureSelector(selector) {
+            const start = performance.now();
+
+            for (let i = 0; i < 100; i += 1) {
+                document.querySelectorAll(selector);
+            }
+
+            return performance.now() - start;
+        }
+
+        document
+            .querySelector("#without-visibility")
+            .addEventListener("click", () => {
+                const time = createCards(false);
+
+                result.textContent =
+                    `Ilma content-visibility atribuudita: ` +
+                    `${time.toFixed(2)} ms`;
+            });
+
+        document
+            .querySelector("#with-visibility")
+            .addEventListener("click", () => {
+                const time = createCards(true);
+
+                result.textContent =
+                    `Content-visibility atribuudiga: ` +
+                    `${time.toFixed(2)} ms`;
+            });
+
+        document
+            .querySelector("#selectors")
+            .addEventListener("click", () => {
+                if (events.children.length === 0) {
+                    createCards(false);
+                }
+
+                const classTime = measureSelector(".card");
+                const elementTime = measureSelector("article");
+                const deepTime = measureSelector("main .events > article.card");
+                const universalTime = measureSelector("*");
+
+                result.textContent = [
+                    `Klass .card: ${classTime.toFixed(2)} ms`,
+                    `Element article: ${elementTime.toFixed(2)} ms`,
+                    `Sügav main .events > article.card: ${deepTime.toFixed(2)} ms`,
+                    `Universaalne *: ${universalTime.toFixed(2)} ms`
+                ].join("\n");
+            });
+    </script>
+</body>
+</html>
